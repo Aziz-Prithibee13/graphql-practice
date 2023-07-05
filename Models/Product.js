@@ -19,6 +19,13 @@ const productSchema = new Schema({
     family : 
     {
         type : String,
+     
+        required : true
+    },
+
+    scientificName : 
+    {
+        type : String,
         required : true
     }
 

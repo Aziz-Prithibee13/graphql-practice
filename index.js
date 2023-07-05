@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require("cors");
-const { graphqlHTTP } = require("express-graphql")
+
 const graphql = require('graphql');
+
+const { graphqlHTTP } = require("express-graphql")
+
 const { Mongoose, default: mongoose } = require('mongoose');
 const product = require('./Models/Product')
-
+const user = require('./Models/User')
 
 require("dotenv").config();
 
@@ -29,11 +32,17 @@ app.use('/graphql', graphqlHTTP({
         _id : String!
         name : String!
         family : String!
+        scientificName : String!
+      }
+
+      type user{
+        name : String!
       }
 
       type RootQuery 
       {
           data : [products!]!
+          user : [user!]!
       }
 
       type RootMutation 
@@ -56,6 +65,7 @@ app.use('/graphql', graphqlHTTP({
       then(events =>
         {
           return events.map(event=>{
+            console.log(...event._doc);
             return {...event._doc};
           })
         }).
@@ -63,6 +73,10 @@ app.use('/graphql', graphqlHTTP({
         {
           throw err;
         })
+    },
+    user : async () => {
+      const users = await user.find({})
+      return users;
     },
 
     getData: (args) => {

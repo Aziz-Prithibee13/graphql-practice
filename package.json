@@ -16,7 +16,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-graphql": "^0.12.0",
-    "graphql": "^16.6.0",
-    "mongoose": "^7.1.2"
+    "graphql": "^14.6.0",
+    "mongoose": "^7.1.2",
+    "youtube-crawler": "^0.0.3"
   }
 }
